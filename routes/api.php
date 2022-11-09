@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::apiResource('cars', CarController::class)->only('store');
+});
 
 //////////////////////////////////////////////////////////////////////////
 /// Mock Endpoints To Be Replaced With RESTful API.
@@ -58,17 +63,6 @@ Route::get('/mock-get-cars', function(Request $request) {
             ]
         ]
     ];
-})->middleware('auth:api');
-
-
-// Mock endpoint to add a new car.
-
-Route::post('mock-add-car', function(Request $request) {
-    $request->validate([
-        'year' => 'required|integer',
-        'make' => 'required|string',
-        'model' => 'required|string'
-    ]);
 })->middleware('auth:api');
 
 
