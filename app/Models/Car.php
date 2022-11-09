@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,7 +16,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property integer $year
  * @property \Illuminate\Support\Carbon $created_id
  * @property \Illuminate\Support\Carbon $updated_id
- * @property-read \App\Models\User $user
+ * @property-read \App\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|static query()
+ * @method \Illuminate\Database\Eloquent\Builder|static owned()
  */
 class Car extends Model
 {
@@ -37,5 +40,10 @@ class Car extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeOwned(Builder $query): Builder
+    {
+        return $query->where('user_id', auth()->id());
     }
 }

@@ -35,4 +35,18 @@ class CarTest extends TestCase
             'year' => $year,
         ]);
     }
+
+    public function testListingOwnedCars()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        Car::factory()->count(3)->create();
+
+        $anotherUser = User::factory()->create();
+        $this->actingAs($anotherUser);
+        Car::factory()->count(2)->create();
+
+        $this->actingAs($user);
+        $this->assertCount(3, Car::query()->owned()->get());
+    }
 }

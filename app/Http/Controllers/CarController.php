@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CarCollection;
 use App\Models\Car;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
 
 class CarController extends Controller
@@ -14,9 +16,9 @@ class CarController extends Controller
         $this->authorizeResource(Car::class);
     }
 
-    public function index()
+    public function index(): ResourceCollection
     {
-        //
+        return new CarCollection(Car::query()->owned()->get());
     }
 
     public function store(StoreCarRequest $request): Response

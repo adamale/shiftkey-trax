@@ -10,9 +10,9 @@ class CarPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     public function view(User $user, Car $car)
