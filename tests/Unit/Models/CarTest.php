@@ -16,13 +16,7 @@ class CarTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        $car = Car::query()->create(
-            [
-                'make' => $this->faker->word(),
-                'model' => $this->faker->word(),
-                'year' => $this->faker->year(),
-            ]
-        );
+        $car = Car::factory()->create();
 
         $this->assertModelExists($car);
     }
