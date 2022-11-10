@@ -33,22 +33,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 //////////////////////////////////////////////////////////////////////////
 
 
-// Mock endpoint to get a car with the given id
-
-Route::get('/mock-get-car/{id}', function(Request $request) {
-    return  [
-        'data' => [
-            'id' => 1,
-            'make' => 'Land Rover',
-            'model' => 'Range Rover Sport',
-            'year' => 2017,
-            'trip_count' => 2,
-            'trip_miles' => 18.1
-        ]
-    ];
-})->middleware('auth:api');
-
-
 // Mock endpoint to delete a car with a given id
 
 Route::delete('mock-delete-car/{id}', function(Request $request) {
