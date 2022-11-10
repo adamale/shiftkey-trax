@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CarCollectionResource extends JsonResource
+class CarResourceCompact extends JsonResource
 {
     public function toArray($request): array
     {
