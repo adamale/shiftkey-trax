@@ -17,4 +17,18 @@ class TripTest extends TestCase
 
         $this->assertModelExists($trip);
     }
+
+    public function test_trip_list_can_be_limited_to_contain_only_trips_owned_by_user()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        Trip::factory()->count(3)->create();
+
+        $anotherUser = User::factory()->create();
+        $this->actingAs($anotherUser);
+        Trip::factory()->count(2)->create();
+
+        $this->actingAs($user);
+        $this->assertCount(3, Trip::query()->owned()->get());
+    }
 }

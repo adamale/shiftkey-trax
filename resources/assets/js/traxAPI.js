@@ -13,7 +13,7 @@ let traxAPI = {
     return `/api/cars/${id}`;
   },
   getTripsEndpoint() {
-    return '/api/mock-get-trips';
+    return '/api/trips';
   },
   addTripEndpoint() {
     return 'api/trips'
