@@ -21,7 +21,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::apiResource('cars', CarController::class)->only('index', 'show', 'store');
+    Route::apiResource('cars', CarController::class)->except('update');
 });
 
 //////////////////////////////////////////////////////////////////////////
@@ -30,13 +30,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 /// - Post data will be in the format seen below.
 /// - /resource/assets/traxAPI.js will have to be updated to align with
 ///   the API implementation
-//////////////////////////////////////////////////////////////////////////
-
-
-// Mock endpoint to delete a car with a given id
-
-Route::delete('mock-delete-car/{id}', function(Request $request) {
-})->middleware('auth:api');
+//////////////////////////////////////////////////////////////////////////=
 
 
 // Mock endpoint to get the trips for the logged in user

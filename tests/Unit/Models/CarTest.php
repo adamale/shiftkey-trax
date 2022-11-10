@@ -49,4 +49,19 @@ class CarTest extends TestCase
 
         $this->assertNotNull(Car::query()->find($car->getKey()));
     }
+
+    public function test_car_can_be_deleted()
+    {
+        $originalCount = Car::query()->count();
+
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        $car = Car::factory()->create();
+
+        $this->assertDatabaseCount(Car::class, $originalCount + 1);
+
+        $car->delete();
+
+        $this->assertDatabaseCount(Car::class, $originalCount);
+    }
 }

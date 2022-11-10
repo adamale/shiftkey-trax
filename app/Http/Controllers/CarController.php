@@ -6,7 +6,6 @@ use App\Http\Resources\CarCollection;
 use App\Http\Resources\CarResource;
 use App\Models\Car;
 use App\Http\Requests\StoreCarRequest;
-use App\Http\Requests\UpdateCarRequest;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
@@ -35,13 +34,10 @@ class CarController extends Controller
         return new CarResource($car);
     }
 
-    public function update(UpdateCarRequest $request, Car $car)
+    public function destroy(Car $car): Response
     {
-        //
-    }
+        $car->delete();
 
-    public function destroy(Car $car)
-    {
-        //
+        return response()->noContent();
     }
 }

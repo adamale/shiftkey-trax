@@ -25,13 +25,8 @@ class CarPolicy
         return true;
     }
 
-    public function update(User $user, Car $car)
+    public function delete(User $user, Car $car): bool
     {
-        //
-    }
-
-    public function delete(User $user, Car $car)
-    {
-        //
+        return $car->user()->is($user);
     }
 }
