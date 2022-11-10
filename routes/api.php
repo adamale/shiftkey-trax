@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\TripController;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ Route::get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('cars', CarController::class)->except('update');
+    Route::apiResource('trips', TripController::class)->only('store');
 });
 
 //////////////////////////////////////////////////////////////////////////
@@ -100,15 +102,4 @@ Route::get('/mock-get-trips', function(Request $request) {
             ]
         ]
     ];
-})->middleware('auth:api');
-
-
-// Mock endpoint to add a new trip.
-
-Route::post('mock-add-trip', function(Request $request) {
-    $request->validate([
-        'date' => 'required|date', // ISO 8601 string
-        'car_id' => 'required|integer',
-        'miles' => 'required|numeric'
-    ]);
 })->middleware('auth:api');
