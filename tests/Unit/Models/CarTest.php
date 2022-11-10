@@ -11,7 +11,7 @@ class CarTest extends TestCase
 {
     use WithFaker;
 
-    public function testAddingCar()
+    public function test_user_can_add_car()
     {
         $user = User::factory()->create();
         $this->actingAs($user);
@@ -36,7 +36,7 @@ class CarTest extends TestCase
         ]);
     }
 
-    public function testListingOwnedCars()
+    public function test_user_can_be_limited_to_list_only_owned_cars()
     {
         $user = User::factory()->create();
         $this->actingAs($user);
