@@ -16,24 +16,15 @@ class CarTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        $make = $this->faker->word();
-        $model = $this->faker->word();
-        $year = $this->faker->year();
-
-        Car::query()->create(
+        $car = Car::query()->create(
             [
-                'make' => $make,
-                'model' => $model,
-                'year' => $year,
+                'make' => $this->faker->word(),
+                'model' => $this->faker->word(),
+                'year' => $this->faker->year(),
             ]
         );
 
-        $this->assertDatabaseHas('cars', [
-            'user_id' => $user->getKey(),
-            'make' => $make,
-            'model' => $model,
-            'year' => $year,
-        ]);
+        $this->assertModelExists($car);
     }
 
     public function test_user_can_be_limited_to_list_only_owned_cars()
