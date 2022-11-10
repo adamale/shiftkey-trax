@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CarResource extends JsonResource
+class CarCollectionResource extends JsonResource
 {
     public function toArray($request): array
     {
@@ -14,8 +14,6 @@ class CarResource extends JsonResource
             'make' => $this->make,
             'model' => $this->model,
             'year' => $this->year,
-            'trip_count' => 0,
-            'trip_miles' => 0,
         ];
     }
 }

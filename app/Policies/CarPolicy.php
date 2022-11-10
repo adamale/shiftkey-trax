@@ -15,9 +15,9 @@ class CarPolicy
         return true;
     }
 
-    public function view(User $user, Car $car)
+    public function view(User $user, Car $car): bool
     {
-        //
+        return $car->user()->is($user);
     }
 
     public function create(User $user): bool

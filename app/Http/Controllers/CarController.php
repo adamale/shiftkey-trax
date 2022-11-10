@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CarCollection;
+use App\Http\Resources\CarResource;
 use App\Models\Car;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
 
@@ -28,9 +30,9 @@ class CarController extends Controller
         return response()->noContent();
     }
 
-    public function show(Car $car)
+    public function show(Car $car): JsonResource
     {
-        //
+        return new CarResource($car);
     }
 
     public function update(UpdateCarRequest $request, Car $car)

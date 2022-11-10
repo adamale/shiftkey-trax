@@ -49,4 +49,27 @@ class CarTest extends TestCase
         $this->actingAs($user);
         $this->assertCount(3, Car::query()->owned()->get());
     }
+
+    public function test_user_can_view_owned_car()
+    {
+        /** @var \App\User $user */
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        $car = Car::factory()->create();
+
+        $this->assertTrue($user->can('view', $car));
+    }
+
+    public function test_user_cannot_view_someones_car()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        $car = Car::factory()->create();
+
+        /** @var \App\User $anotherUser */
+        $anotherUser = User::factory()->create();
+        $this->actingAs($anotherUser);
+
+        $this->assertTrue($anotherUser->cannot('view', $car));
+    }
 }
