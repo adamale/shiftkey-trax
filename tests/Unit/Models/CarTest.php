@@ -11,7 +11,7 @@ class CarTest extends TestCase
 {
     use WithFaker;
 
-    public function test_user_can_add_car()
+    public function test_car_can_be_added_by_user()
     {
         $user = User::factory()->create();
         $this->actingAs($user);
@@ -27,7 +27,7 @@ class CarTest extends TestCase
         $this->assertModelExists($car);
     }
 
-    public function test_user_can_be_limited_to_list_only_owned_cars()
+    public function test_car_list_can_be_limited_to_contain_only_cars_owned_by_user()
     {
         $user = User::factory()->create();
         $this->actingAs($user);
@@ -41,7 +41,7 @@ class CarTest extends TestCase
         $this->assertCount(3, Car::query()->owned()->get());
     }
 
-    public function test_user_can_view_owned_car()
+    public function test_car_can_be_viewed_by_owner()
     {
         /** @var \App\User $user */
         $user = User::factory()->create();
@@ -51,7 +51,7 @@ class CarTest extends TestCase
         $this->assertTrue($user->can('view', $car));
     }
 
-    public function test_user_cannot_view_someones_car()
+    public function test_car_cannot_be_viewed_by_non_owner()
     {
         $user = User::factory()->create();
         $this->actingAs($user);
